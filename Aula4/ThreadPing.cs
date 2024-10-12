@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ConsoleApp.Aula4
@@ -15,34 +16,34 @@ namespace ConsoleApp.Aula4
 
         public void StartPing()
         {
-            Console.Write("Digite S a qualquer momento para interromper");
+            Console.WriteLine("Digite: S a qualquer momento para interromper o ping");
 
             var threadPingger = new Thread(ExecutePing);
             threadPingger.Start();
-            executePing = true;
+            executePing = true; //mantém a thread em execução continua
 
             var comandoSair = "S";
-            var comando = string.Empty;
+            var comandoLido = string.Empty;
 
-            while (!comandoSair.Equals(comando))
+            while (!comandoSair.Equals(comandoLido))
             {
-                comando = Console.ReadLine();
+                comandoLido = Console.ReadLine();
             }
             executePing = false;
 
+            //Espera finalizar
             while (threadPingger.IsAlive)
             {
                 Console.WriteLine("Esperando finalizar...");
-
-                threadPingger.Join();
             }
 
-            Console.WriteLine("Thread Finalizada");
+            Console.WriteLine("Thread finalizada!");
+            Console.WriteLine("-----------------------------------");
         }
 
         public void ExecutePing()
         {
-            while (countPing < 4)
+            while (executePing)
             {
                 Ping pingger = new Ping();
 
@@ -51,7 +52,7 @@ namespace ConsoleApp.Aula4
                 Console.WriteLine($"Ping {countPing}: {endereco} | Status: {pingResponse.Status} - {pingResponse.RoundtripTime}ms");
                 countPing++;
 
-                // Espera alguns segundos
+                //espera alguns segundos
                 Thread.Sleep(2000);
             }
         }

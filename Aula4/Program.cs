@@ -1,26 +1,38 @@
-﻿using System;
+﻿using ConsoleApp.Aula4;
+using System;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ConsoleApp.Aula4
 {
-    public class Program
+    class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main()
         {
-            Console.WriteLine("Aula prática de C# 4");
-            Console.WriteLine("--------------------");
+            Console.WriteLine("Aula Prática de C# 4!");
+            Console.WriteLine("---------------------------------------");
             Console.WriteLine("Threads");
 
-            //ThreadPing exercicio1 = new ThreadPing();
+            ThreadPing exercicio1 = new ThreadPing();
             //exercicio1.StartPing();
 
-            Console.WriteLine("--------------------");
-            Console.WriteLine("Tasks e Async/Await");
 
-            //PessoaFinder pessoaFinder = new PessoaFinder();
-            //pessoaFinder.ExercicioPessoaAsync();
+            Console.WriteLine("---------------------------------------");
+            Console.WriteLine("Tasks Await, Chain, WhenAll");
+            Console.WriteLine("---------------------------------------");
+
+            PessoaFinder pessoaFinder = new PessoaFinder();
+            //await pessoaFinder.ExercicioPessoaAsync();
+
+            Console.WriteLine("---------------------------------------");
+            Console.WriteLine("Tasks e Async/Await com IO Bound");
+            Console.WriteLine("---------------------------------------");
 
             PraticaIOAsync praticaIOAsync = new PraticaIOAsync();
-            _ = praticaIOAsync.Exercicio2Async();
+            //await praticaIOAsync.Exercicio2Async();
         }
+
+
     }
 }

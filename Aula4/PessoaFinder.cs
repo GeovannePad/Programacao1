@@ -70,7 +70,7 @@ namespace ConsoleApp.Aula4
                     var cronometro = new Stopwatch();
                     cronometro.Start();
 
-                    var pessoaFound = listaPessoas.Find((p) => p.Equals(pessoa));
+                    var pessoaFound = listaPessoas.Find((p) => { return p == pessoa; });
 
                     cronometro.Stop();
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,17 +16,17 @@ namespace ConsoleApp.Aula4
 
             public List<Arquivo> Arquivos { get; set; }
         }
-
         public class Arquivo
         {
             public string Nome { get; set; }
             public decimal TamanhoEmMB { get; set; }
         }
 
+
         public async Task Exercicio2Async()
         {
-            Console.WriteLine("Informa uma lista de diretórios para contarmos a quantidade de arquivos...");
-            Console.WriteLine("Digite 'S' para finalizar o input:");
+            Console.WriteLine("Informe uma lisa de diretórios para contarmos a quantidade de arquivos....");
+            Console.WriteLine("Digito 'S' para finalizar o input:");
 
             string diretorio = string.Empty;
             string comandoStop = "S";
@@ -47,26 +48,30 @@ namespace ConsoleApp.Aula4
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine($"Erro ao processar o input de diretórios. Tente novamente");
+                    Console.WriteLine($"Erro ao processar o input de diretórios. Tente novamente.");
                 }
+
             } while (!comandoStop.Equals(diretorio));
 
-            var diretorioCalculado = new List<Diretorio>();
-            var listaTasks = new List<Task>();
 
+            //Inicia uma task para cada dir
+            var diretoriosCalculado = new List<Diretorio>();
+            var listaTasks = new List<Task>(listaDiretorios.Count);
             foreach (var dir in listaDiretorios)
             {
-                var taskDir = new Task(async () =>
+                var taskDir = Task.Run(async () =>
                 {
                     var diretorioCalculado = new Diretorio
                     {
                         Nome = dir
                     };
 
-                    var arquivos = await findDirFilesAsync(dir);
+                    var arquivos = await FindDirFilesAsync(dir);
 
                     diretorioCalculado.Arquivos = arquivos;
                     diretorioCalculado.TamanhoEmMB = arquivos.Sum(a => a.TamanhoEmMB);
+
+                    diretoriosCalculado.Add(diretorioCalculado);
                 });
 
                 listaTasks.Add(taskDir);
@@ -74,12 +79,18 @@ namespace ConsoleApp.Aula4
 
             await Task.WhenAll(listaTasks);
 
-            Console.WriteLine("=========================");
+            Console.WriteLine("***********************");
             Console.WriteLine("Processo finalizado!");
-            Console.WriteLine("=========================");
+            Console.WriteLine("***********************");
+
+            foreach (var diretorioCalc in diretoriosCalculado)
+            {
+                Console.WriteLine($"Dir: {diretorioCalc.Nome} | Quantidade de Arquivos: {diretorioCalc.Arquivos.Count} | Tamanho: {diretorioCalc.TamanhoEmMB} MB");
+            }
+
         }
 
-        public async Task<List<Arquivo>> findDirFilesAsync(string path)
+        public async Task<List<Arquivo>> FindDirFilesAsync(string path)
         {
             var files = await Task.Run(() =>
             {
@@ -87,7 +98,7 @@ namespace ConsoleApp.Aula4
                 return filesDir;
             });
 
-            var arquivos = new List<Arquivo>(files.Count());
+            var arquivos = new List<Arquivo>(files.Length);
 
             foreach (var file in files)
             {
