@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp.Aula5.Entidades
 {
-    public class Aluno
+    public class Autor
     {
-        public Guid Id { get; set; }
+        public int AutorId { get; set; }
         public string Nome { get; set; }
-        public string Email { get; set; }
-        public DateTime DataNascimento { get; set; }
-
-        public List<CursoAluno> Cursos { get; set; }
+        public string WebUrl { get; set; }
+        public List<LivroAutor> Livros { get; set; }
     }
 }

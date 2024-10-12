@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ConsoleApp.Aula5.Entidades;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,10 @@ namespace ConsoleApp.Aula5
 {
     public class ApplicationContext : DbContext
     {
-        private const string stringDeConexao = @"...";
+        private const string stringDeConexao = @"Server=database-aula.cg8lcumypg6o.us-east-2.rds.amazonaws.com;Port=3306;Database=dbaula;User Id=admin;Password=9b&bdWB5Aw^1;";
 
-        public DbSet<Aluno> Alunos { get; set; }
-        public DtSet<Curso> Cursos { get; set; }
-        public DbSet<Instituicao> instituicoes { get; set; }
+        public DbSet<Livro> Livros { get; set; }
+        public DbSet<Autor> Autores { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
