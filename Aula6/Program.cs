@@ -31,6 +31,26 @@ namespace ConsoleApp.Aula6
             {
                 Console.WriteLine($"{autor.Nome} - {autor.Editora} - {autor.DataNascimento}");
             }
+
+            Console.WriteLine("--------------------------------------------------------");
+            Console.WriteLine("Consumindo via SOAP");
+            Console.WriteLine("--------------------------------------------------------");
+
+            // Consumindo Web Api pelo Console
+            var httpClient = new HttpClient();
+            int numeroFibonacci = 10;
+            HttpResponseMessage responseFibonnaci = await httpClient.GetAsync($"http://localhost:5270/fibonnaci?numero={numeroFibonacci}");
+
+            if (responseFibonnaci.IsSuccessStatusCode)
+            {
+                string contentString = await responseFibonnaci.Content.ReadAsStringAsync();
+                var sequenciaFibonnaci = System.Text.Json.JsonSerializer.Deserialize<int[]>(contentString);
+
+                foreach (int numero in sequenciaFibonnaci)
+                {
+                    Console.Write($"{numero},");
+                }
+            }
         }
     }
 }

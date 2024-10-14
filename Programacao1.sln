@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aula5", "Aula5\Aula5.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationSoap", "WebApplicationSoap\WebApplicationSoap.csproj", "{96940F07-77EE-4793-AF12-4CB7FAF29CB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aula6", "Aula6\Aula6.csproj", "{90885EC0-412E-4B02-87FF-8503DE519213}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aula6", "Aula6\Aula6.csproj", "{90885EC0-412E-4B02-87FF-8503DE519213}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{9887862E-661B-440E-9261-5832EAC5CA84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{90885EC0-412E-4B02-87FF-8503DE519213}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90885EC0-412E-4B02-87FF-8503DE519213}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90885EC0-412E-4B02-87FF-8503DE519213}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9887862E-661B-440E-9261-5832EAC5CA84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9887862E-661B-440E-9261-5832EAC5CA84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9887862E-661B-440E-9261-5832EAC5CA84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9887862E-661B-440E-9261-5832EAC5CA84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
